@@ -218,7 +218,7 @@ function HomePage() {
 
 export default (parentRoute: RootRoute) =>
   createRoute({
-    path: "/",
+    path: "/admin",
     component: HomePage,
     getParentRoute: () => parentRoute,
   });

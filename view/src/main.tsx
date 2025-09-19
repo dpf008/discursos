@@ -7,6 +7,8 @@ import {
   RouterProvider,
 } from "@tanstack/react-router";
 import HomePage from "./routes/home.tsx";
+import LandingPage from "./routes/landing.tsx";
+import GeradorRoute from "./routes/gerador.tsx";
 import { Toaster } from "sonner";
 
 import "./styles.css";
@@ -16,7 +18,11 @@ const rootRoute = createRootRoute({
   component: () => <Outlet />,
 });
 
+export { rootRoute };
+
 const routeTree = rootRoute.addChildren([
+  LandingPage,
+  GeradorPage,
   HomePage(rootRoute),
 ]);
 

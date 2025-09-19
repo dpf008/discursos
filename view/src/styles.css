@@ -6,9 +6,7 @@
 
 body {
   @apply m-0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Source Serif Pro', 'Georgia', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -128,11 +126,126 @@ code {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* DeMolay Custom Colors */
+:root {
+  --demolay-navy: #1B365D;
+  --demolay-gold: #D4AF37;
+  --demolay-cream: #F5F5DC;
+  --demolay-burgundy: #800020;
+  --demolay-emerald: #50C878;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Typography Classes */
+  .font-display {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+  }
+  
+  .font-heading {
+    font-family: 'Cinzel', serif;
+  }
+  
+  .font-body {
+    font-family: 'Source Serif Pro', 'Georgia', serif;
+  }
+  
+  /* Custom Colors */
+  .text-demolay-navy {
+    color: var(--demolay-navy);
+  }
+  
+  .text-demolay-gold {
+    color: var(--demolay-gold);
+  }
+  
+  .text-demolay-burgundy {
+    color: var(--demolay-burgundy);
+  }
+  
+  .text-demolay-emerald {
+    color: var(--demolay-emerald);
+  }
+  
+  .bg-demolay-navy {
+    background-color: var(--demolay-navy);
+  }
+  
+  .bg-demolay-gold {
+    background-color: var(--demolay-gold);
+  }
+  
+  .bg-demolay-cream {
+    background-color: var(--demolay-cream);
+  }
+  
+  .bg-demolay-burgundy {
+    background-color: var(--demolay-burgundy);
+  }
+  
+  .bg-demolay-emerald {
+    background-color: var(--demolay-emerald);
+  }
+  
+  .border-demolay-gold {
+    border-color: var(--demolay-gold);
+  }
+  
+  .border-demolay-navy {
+    border-color: var(--demolay-navy);
+  }
+  
+  .border-demolay-emerald {
+    border-color: var(--demolay-emerald);
+  }
+  
+  /* Decorative Elements */
+  .ornament-border {
+    position: relative;
+  }
+  
+  .ornament-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--demolay-gold), transparent);
+  }
+  
+  /* Scroll Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  /* Hover Effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(27, 54, 93, 0.15);
   }
 }

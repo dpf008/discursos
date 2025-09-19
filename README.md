@@ -1,12 +1,8 @@
-# Deco MCP template app
+# A Arte do Discurso
 
-A full-stack template for building
-[Model Context Protocol (MCP)](https://spec.modelcontextprotocol.io/) servers
-with a modern React frontend.
+Uma plataforma educativa para desenvolvimento de habilidades de oratória, inspirada nos valores e tradições clássicas da Ordem DeMolay.
 
-This template provides a complete development environment where your MCP server
-not only exposes tools and workflows to AI agents but also serves a beautiful
-web interface built with React and Tailwind CSS.
+Aprenda os fundamentos de um bom discurso através de uma experiência web interativa que combina ensinamentos aristotélicos com tecnologia moderna, incluindo geração de discursos assistida por IA.
 
 ## 📝 Development History
 
@@ -14,84 +10,98 @@ This repository uses [Specstory](https://specstory.com/) to track the history of
 prompts that were used to code this repo. You can inspect the complete
 development history in the [`.specstory/`](.specstory/) folder.
 
-## ✨ Features
+## ✨ Características
 
-- **🤖 MCP Server**: Cloudflare Workers-based server with typed tools and
-  workflows
-- **⚛️ React Frontend**: Modern React app with Vite, TanStack Router, and
-  Tailwind CSS
-- **🎨 UI Components**: Pre-configured shadcn/ui components for rapid
-  development
-- **🔧 Type Safety**: Full TypeScript support with auto-generated RPC client
-  types
-- **🚀 Hot Reload**: Live development with automatic rebuilding for both
-  frontend and backend
-- **☁️ Ready to Deploy**: One-command deployment to Cloudflare Workers
+- **📚 Conteúdo Educativo**: Fundamentos clássicos de oratória baseados em Aristóteles
+- **🎯 Cinco Pilares**: Aprenda os elementos essenciais de um bom discurso
+- **💡 Dicas Práticas**: Métodos comprovados de treinamento e desenvolvimento
+- **📖 Histórias Genuínas**: Importância da autenticidade na comunicação
+- **🤖 IA Integrada**: Ferramenta de geração de discursos personalizada (em desenvolvimento)
+- **🎨 Design Clássico**: Interface inspirada no estilo DeMolay com tipografia elegante
+- **📱 Responsivo**: Experiência otimizada para desktop e mobile
 
-## 🚀 Quick Start
+## 🚀 Como Usar
 
-### Prerequisites
+### Pré-requisitos
 
 - Node.js ≥22.0.0
 - [Deco CLI](https://deco.chat): `npm i -g deco-cli`
 
-### Setup
+### Configuração
 
 ```bash
-# Install dependencies
+# Instalar dependências
 npm install
 
-# Configure your app
+# Configurar a aplicação
 npm run configure
 
-# Start development server
+# Iniciar servidor de desenvolvimento
 npm run dev
 ```
 
-The server will start on `http://localhost:8787` serving both your MCP endpoints
-and the React frontend.
+O servidor iniciará em `http://localhost:8787` servindo tanto os endpoints MCP quanto a interface React.
 
-## 📁 Project Structure
+## 📖 Conteúdo Educativo
 
-```
-├── server/           # MCP Server (Cloudflare Workers + Deco runtime)
-│   ├── main.ts      # Server entry point with tools & workflows
-│   └── deco.gen.ts  # Auto-generated integration types
-└── view/            # React Frontend (Vite + Tailwind CSS)
-    ├── src/
-    │   ├── lib/rpc.ts    # Typed RPC client for server communication
-    │   ├── routes/       # TanStack Router routes
-    │   └── components/   # UI components with Tailwind CSS
-    └── package.json
-```
+### Os Cinco Pilares de um Bom Discurso
 
-## 🛠️ Development Workflow
+1. **É Curto e Direto** - Respeite o tempo da audiência
+2. **Fala Algo Único** - Traga uma perspectiva nova
+3. **Conta uma História** - Conecte através de narrativas
+4. **Usa Palavras Simples, mas Interessantes** - Clareza com impacto
+5. **São Autênticos** - A sinceridade é percebida
 
-- **`npm run dev`** - Start development with hot reload
-- **`npm run gen`** - Generate types for external integrations
-- **`npm run gen:self`** - Generate types for your own tools/workflows
-- **`npm run deploy`** - Deploy to production
+### Fundamentos Clássicos (Aristóteles)
 
-## 🔗 Frontend ↔ Server Communication
+- **Ethos** (Credibilidade) - Construa autoridade moral
+- **Pathos** (Emoção) - Conecte-se emocionalmente
+- **Logos** (Lógica) - Estruture argumentos convincentes
 
-The template includes a fully-typed RPC client that connects your React frontend
-to your MCP server:
+## 🎯 Estrutura da Aplicação
 
-```typescript
-// Typed calls to your server tools and workflows
-const result = await client.MY_TOOL({ input: "data" });
-const workflowResult = await client.MY_WORKFLOW({ input: "data" });
-```
+### Landing Page (/)
+- **Hero Section**: Apresentação da "Arte do Discurso"
+- **Cinco Pilares**: Fundamentos de um bom discurso
+- **Fundamentos Clássicos**: Ethos, Pathos e Logos
+- **Como Treinar**: Métodos práticos de desenvolvimento
+- **Histórias Genuínas**: Importância da autenticidade
+- **CTA**: Direcionamento para o gerador de discursos
 
-## 📖 Learn More
+### Gerador (/gerador) - Em Desenvolvimento
+- Ferramenta de IA para criação de discursos personalizados
+- Aplicação dos princípios aprendidos na landing page
+- Interface intuitiva para diferentes tipos de ocasião
 
-This template is built for deploying primarily on top of the
-[Deco platform](https://deco.chat/about) which can be found at the
-[deco-cx/chat](https://github.com/deco-cx/chat) repository.
+## 🎨 Design System
 
-Documentation can be found at [https://docs.deco.page](https://docs.deco.page)
+### Paleta de Cores (DeMolay)
+- **Azul Marinho** (#1B365D) - Cor principal
+- **Dourado** (#D4AF37) - Acentos e destaques
+- **Creme** (#F5F5DC) - Fundos suaves
+- **Borgonha** (#800020) - Detalhes especiais
+- **Verde Esmeralda** (#50C878) - Elementos de apoio
+
+### Tipografia
+- **Títulos**: Playfair Display (elegante e clássica)
+- **Subtítulos**: Cinzel (caps pequenas, espaçamento amplo)
+- **Corpo**: Source Serif Pro (legível e profissional)
+
+## 🛠️ Comandos de Desenvolvimento
+
+- **`npm run dev`** - Iniciar desenvolvimento com hot reload
+- **`npm run gen`** - Gerar tipos para integrações externas
+- **`npm run gen:self`** - Gerar tipos para ferramentas próprias
+- **`npm run deploy`** - Deploy para produção
+
+## 🎓 Próximos Passos
+
+1. **Implementar Gerador de IA**: Ferramenta para criação de discursos
+2. **Adicionar Mais Conteúdo**: Exercícios práticos e exemplos
+3. **Sistema de Usuários**: Salvamento de progresso e discursos
+4. **Biblioteca de Recursos**: Livros, artigos e materiais complementares
+5. **Comunidade**: Espaço para compartilhamento e feedback
 
 ---
 
-**Ready to build your next MCP server with a beautiful frontend?
-[Get started now!](https://deco.chat)**
+**Desenvolvido com os valores e tradições da Ordem DeMolay 🏛️**
