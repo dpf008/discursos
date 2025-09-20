@@ -16,7 +16,13 @@ development history in the [`.specstory/`](.specstory/) folder.
 - **🎯 Cinco Pilares**: Aprenda os elementos essenciais de um bom discurso
 - **💡 Dicas Práticas**: Métodos comprovados de treinamento e desenvolvimento
 - **📖 Histórias Genuínas**: Importância da autenticidade na comunicação
-- **🤖 IA Integrada**: Ferramenta de geração de discursos personalizada (em desenvolvimento)
+- **🤖 Gerador de Discursos IA**: Ferramenta completa de geração personalizada
+  - Interface intuitiva com Material UI
+  - Contextualização por tipo de orador (DeMolay Ativo, Maçom, Senior, Conselheiro)
+  - Seleção de ocasião e temas
+  - 4 estilos diferentes de discurso
+  - Output estruturado em blocos com indicações para o orador
+  - Visualização em modo leitura e apresentação
 - **🎨 Design Clássico**: Interface inspirada no estilo DeMolay com tipografia elegante
 - **📱 Responsivo**: Experiência otimizada para desktop e mobile
 

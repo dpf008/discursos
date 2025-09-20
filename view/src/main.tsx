@@ -10,6 +10,9 @@ import HomePage from "./routes/home.tsx";
 import LandingPage from "./routes/landing.tsx";
 import GeradorRoute from "./routes/gerador.tsx";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { demolayTheme } from "./theme/demolay-theme.ts";
 
 import "./styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,7 +25,7 @@ export { rootRoute };
 
 const routeTree = rootRoute.addChildren([
   LandingPage,
-  GeradorPage,
+  GeradorRoute,
   HomePage(rootRoute),
 ]);
 
@@ -50,10 +53,13 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster />
-      </QueryClientProvider>
+      <ThemeProvider theme={demolayTheme}>
+        <CssBaseline />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <Toaster />
+        </QueryClientProvider>
+      </ThemeProvider>
     </StrictMode>,
   );
 }

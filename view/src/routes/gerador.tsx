@@ -29,7 +29,8 @@ import {
   Style,
   AutoAwesome,
 } from "@mui/icons-material";
-import { useAuth } from "../lib/hooks";
+import { useAuth, useGenerateDiscurso } from "../lib/hooks";
+import { DiscursoResult } from "../components/discurso-result";
 
 // Tipos para o formulário
 interface FormData {
@@ -44,6 +45,7 @@ interface FormData {
 // Componente principal do gerador
 function GeradorPage() {
   const { user, isLoading: authLoading } = useAuth();
+  const generateDiscurso = useGenerateDiscurso();
   const [formData, setFormData] = useState<FormData>({
     tipoOrador: "",
     ocasiao: "",
@@ -52,7 +54,6 @@ function GeradorPage() {
     estilo: "",
     duracaoDesejada: "medio",
   });
-  const [isGenerating, setIsGenerating] = useState(false);
 
   // Verificar se usuário está autenticado
   if (authLoading) {
@@ -70,6 +71,23 @@ function GeradorPage() {
     // Redirecionar para OAuth se não estiver logado
     window.location.href = "/oauth/start";
     return null;
+  }
+
+  // Se o discurso foi gerado com sucesso, mostrar o resultado
+  if (generateDiscurso.isSuccess && generateDiscurso.data?.discurso) {
+    return (
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <DiscursoResult 
+          discurso={generateDiscurso.data.discurso}
+          onEdit={() => generateDiscurso.reset()}
+          onRegenerate={() => {
+            generateDiscurso.reset();
+            // Rerun the generation with same data
+            handleGenerate(formData, generateDiscurso);
+          }}
+        />
+      </Container>
+    );
   }
 
   return (
@@ -259,12 +277,12 @@ function GeradorPage() {
             <Button
               variant="contained"
               size="large"
-              startIcon={isGenerating ? <CircularProgress size={20} /> : <AutoAwesome />}
-              disabled={!isFormValid(formData) || isGenerating}
-              onClick={() => handleGenerate(formData, setIsGenerating)}
+              startIcon={generateDiscurso.isPending ? <CircularProgress size={20} /> : <AutoAwesome />}
+              disabled={!isFormValid(formData) || generateDiscurso.isPending}
+              onClick={() => handleGenerate(formData, generateDiscurso)}
               sx={{ px: 6, py: 2, fontSize: "1.1rem" }}
             >
-              {isGenerating ? "Gerando..." : "Gerar Discurso com IA"}
+              {generateDiscurso.isPending ? "Gerando..." : "Gerar Discurso com IA"}
             </Button>
             
             {!isFormValid(formData) && (
@@ -408,17 +426,25 @@ function isFormValid(formData: FormData): boolean {
   );
 }
 
-function handleGenerate(formData: FormData, setIsGenerating: (loading: boolean) => void) {
-  setIsGenerating(true);
-  
-  // TODO: Implementar chamada para o hook de geração
-  console.log("Gerando discurso com:", formData);
-  
-  // Simular geração por enquanto
-  setTimeout(() => {
-    setIsGenerating(false);
-    alert("Discurso gerado! (placeholder - implementar visualização)");
-  }, 3000);
+function handleGenerate(formData: FormData, generateDiscurso: any) {
+  // Preparar temas finais combinando selecionados e customizados
+  const temasFinal = [...formData.temas];
+  if (formData.temasCustom.trim()) {
+    const temasCustomArray = formData.temasCustom
+      .split(',')
+      .map(tema => tema.trim())
+      .filter(tema => tema.length > 0);
+    temasFinal.push(...temasCustomArray);
+  }
+
+  // Chamar a API de geração
+  generateDiscurso.mutate({
+    tipoOrador: formData.tipoOrador,
+    ocasiao: formData.ocasiao,
+    temas: temasFinal,
+    estilo: formData.estilo,
+    duracaoDesejada: formData.duracaoDesejada,
+  });
 }
 
 // Definição da rota

@@ -1,6 +1,7 @@
 import { client } from "./rpc-logged";
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -56,6 +57,60 @@ export const useOptionalUser = () => {
         },
       }),
     retry: false,
+  });
+};
+
+/**
+ * Hook for authentication that doesn't throw errors.
+ * Returns user data and loading state.
+ * Good for components that need to handle authentication states gracefully.
+ */
+export const useAuth = () => {
+  const { data: user, isLoading, error } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      client.GET_USER({}, {
+        handleResponse: async (res: Response) => {
+          if (res.status === 401) {
+            return null;
+          }
+          return res.json();
+        },
+      }),
+    retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  return {
+    user: user || null,
+    isLoading,
+    isAuthenticated: !!user,
+    error,
+  };
+};
+
+/**
+ * Hook for generating speeches with AI
+ */
+export const useGenerateDiscurso = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (input: {
+      tipoOrador: string;
+      ocasiao: string;
+      temas: string[];
+      estilo: string;
+      duracaoDesejada?: string;
+    }) => client.GENERATE_DISCURSO(input),
+    onSuccess: (data) => {
+      // Cache the generated speech
+      queryClient.setQueryData(["generated-discurso"], data);
+      toast.success("Discurso gerado com sucesso!");
+    },
+    onError: (error) => {
+      console.error("Erro ao gerar discurso:", error);
+      toast.error("Erro ao gerar discurso. Tente novamente.");
+    },
   });
 };
 

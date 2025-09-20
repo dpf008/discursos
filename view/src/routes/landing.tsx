@@ -305,7 +305,7 @@ function GenuineStoriesSection() {
 // CTA Section Component
 function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-r from-demolay-navy to-blue-800 text-white">
+    <section className="py-20 bg-demolay-navy text-white">
       <div className="max-w-4xl mx-auto px-6 text-center">
         {/* Header */}
         <h2 className="text-4xl md:text-5xl font-bold mb-8 font-display text-white">
